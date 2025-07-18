@@ -1,0 +1,63 @@
+<!-- Header/Toolbar -->
+<mat-toolbar color="accent">
+  <span>🚀 Crypto Tracker</span>
+  <span class="spacer"></span>
+  <button mat-button>
+    <mat-icon>show_chart</mat-icon>
+    Portfolio
+  </button>
+  <button mat-button>
+    <mat-icon>notifications</mat-icon>
+    Alerts
+  </button>
+  <button mat-raised-button color="warn">
+    <mat-icon>login</mat-icon>
+    Login
+  </button>
+</mat-toolbar>
+
+<!-- Main Content -->
+<div class="dashboard-container">
+  <h1>Top Cryptocurrencies</h1>
+  
+  <div class="crypto-grid">
+    <!-- Bitcoin Card -->
+    <mat-card class="crypto-card">
+      <mat-card-header>
+        <div mat-card-avatar class="bitcoin-avatar">₿</div>
+        <mat-card-title>Bitcoin</mat-card-title>
+        <mat-card-subtitle>BTC</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="price">$45,123.45</div>
+        <div class="change positive">+2.34%</div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Ethereum Card -->
+    <mat-card class="crypto-card">
+      <mat-card-header>
+        <div mat-card-avatar class="ethereum-avatar">Ξ</div>
+        <mat-card-title>Ethereum</mat-card-title>
+        <mat-card-subtitle>ETH</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="price">$2,987.12</div>
+        <div class="change negative">-1.23%</div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Cardano Card -->
+    <mat-card class="crypto-card">
+      <mat-card-header>
+        <div mat-card-avatar class="cardano-avatar">₳</div>
+        <mat-card-title>Cardano</mat-card-title>
+        <mat-card-subtitle>ADA</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="price">$0.456</div>
+        <div class="change positive">+5.67%</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

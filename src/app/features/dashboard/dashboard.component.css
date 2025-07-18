@@ -1,0 +1,94 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.dashboard-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-container h1 {
+  color: #ffffff;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.crypto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.crypto-card {
+  background: var(--bg-secondary) !important;
+  border: 1px solid #334155;
+  transition: transform 0.2s ease;
+}
+
+.crypto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Avatars */
+.bitcoin-avatar {
+  background: var(--accent-gold) !important;
+  color: #000 !important;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.ethereum-avatar {
+  background: #627eea !important;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.cardano-avatar {
+  background: #0033ad !important;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Price styling */
+.price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.change {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.change.positive {
+  color: var(--accent-green);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.change.negative {
+  color: var(--accent-red);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Card headers */
+.crypto-card .mat-mdc-card-header {
+  color: #ffffff;
+}
+
+.crypto-card .mat-mdc-card-title {
+  color: #ffffff !important;
+}
+
+.crypto-card .mat-mdc-card-subtitle {
+  color: #94a3b8 !important;
+}

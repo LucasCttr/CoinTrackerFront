@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  background: #0f172a; /* Dark theme para crypto */
+  color: #ffffff;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Variables de colores crypto */
+:root {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --accent-green: #10b981; /* Para ganancias */
+  --accent-red: #ef4444;   /* Para pérdidas */
+  --accent-gold: #f59e0b;  /* Para Bitcoin */
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
