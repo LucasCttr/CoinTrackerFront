@@ -1,0 +1,28 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+/* Reset de estilos globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color:  #040c1d; /* 🎯 Fondo global oscuro */
+  color: white; /* 🎯 Texto blanco global */
+}
+
+/* Variables de colores crypto */
+:root {
+  --bg-primary: #17223d;
+  --bg-secondary: #1e293b;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+  --accent-gold: #f59e0b;
+}

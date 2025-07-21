@@ -1,0 +1,152 @@
+/* ========================================
+   TOOLBAR STYLES
+   ======================================== */
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 64px;
+  padding: 0 24px;
+  background-color: var(--bg-primary) !important; /* ✅ Usa la variable de fondo */
+}
+
+/* ========================================
+   BRAND/LOGO STYLES
+   ======================================== */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.brand-icon {
+  font-size: 1.8rem;
+}
+
+/* ========================================
+   SPACER UTILITY
+   ======================================== */
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* ========================================
+   NAVIGATION BUTTONS
+   ======================================== */
+.nav-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: auto;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-button mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* .nav-button span {
+  font-size: 0.9rem;
+  color: #fff;
+  display: inline-block;
+} */
+
+.nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);;
+}
+
+/* ========================================
+   LOGIN BUTTON SPECIAL STYLES
+   ======================================== */
+.login-button {
+  margin-left: 16px;
+  font-weight: 600;
+  border-radius: 24px;
+  padding: 8px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) { 
+  mat-toolbar {
+    padding: 0 16px;
+    height: 56px;
+  }
+  
+  .brand {
+    font-size: 1.2rem;
+  }
+  
+  .nav-button span {
+    display: none; /* Hide text on mobile, keep only icons */
+  }
+  
+  .nav-button {
+    min-width: 40px;
+    padding: 8px;
+  }
+  
+  .login-button {
+    padding: 8px 16px;
+    margin-left: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-text {
+    display: none; /* Hide brand text on very small screens */
+  }
+  
+  .nav-buttons {
+    gap: 4px;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+.nav-button:focus,
+.login-button:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+mat-toolbar {
+  animation: slideDown 0.3s ease-out;
+}

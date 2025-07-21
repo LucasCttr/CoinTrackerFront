@@ -1,0 +1,75 @@
+<div class="auth-modal">
+  <div mat-dialog-content>
+    <h2 mat-dialog-title class="auth-title">
+      <mat-icon>rocket_launch</mat-icon>
+      Crypto Tracker
+    </h2>
+    
+    <mat-tab-group class="auth-tabs">
+      <!-- TAB LOGIN -->
+      <mat-tab label="Login">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="auth-form">
+          <mat-form-field class="auth-field">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="tu@email.com">
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+          
+          <mat-form-field class="auth-field">
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          
+          <button mat-raised-button type="submit" class="auth-button auth-button--primary" [disabled]="loginForm.invalid">
+            <mat-icon>login</mat-icon>
+            Iniciar Sesión
+          </button>
+        </form>
+      </mat-tab>
+      
+      <!-- TAB REGISTER -->
+      <mat-tab label="Register">
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="auth-form">
+          <mat-form-field class="auth-field">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" placeholder="Tu nombre">
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+          
+          <mat-form-field class="auth-field">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="tu@email.com">
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+          
+          <mat-form-field class="auth-field">
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+            <mat-icon matSuffix>lock</mat-icon>
+          </mat-form-field>
+          
+          <mat-form-field class="auth-field">
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="confirmPassword">
+            <mat-icon matSuffix>lock_outline</mat-icon>
+          </mat-form-field>
+          
+          <button mat-raised-button type="submit" class="auth-button auth-button--accent" [disabled]="registerForm.invalid">
+            <mat-icon>person_add</mat-icon>
+            Registrarse
+          </button>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  
+  <div mat-dialog-actions class="auth-actions">
+    <button mat-button class="auth-cancel" (click)="onClose()">
+      <mat-icon>close</mat-icon>
+      Cancelar
+    </button>
+  </div>
+</div>

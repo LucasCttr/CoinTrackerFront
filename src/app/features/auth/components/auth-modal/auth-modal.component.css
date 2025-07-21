@@ -1,0 +1,181 @@
+/* ========================================
+   AUTH MODAL CONTAINER
+   ======================================== */
+.auth-modal {
+  background: var(--bg-primary);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   TITLE STYLES
+   ======================================== */
+.auth-title {
+  text-align: center;
+  color: var(--accent-gold) !important;
+  font-weight: 600;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.auth-title mat-icon {
+  font-size: 28px;
+  color: var(--accent-gold);
+}
+
+/* ========================================
+   TABS STYLING
+   ======================================== */
+.auth-tabs {
+  background: transparent;
+}
+
+.auth-tabs ::ng-deep .mat-tab-header {
+  background: var(--bg-secondary);
+  border-radius: 8px 8px 0 0;
+}
+
+.auth-tabs ::ng-deep .mat-tab-label {
+  color: #ffffff !important;
+  font-weight: 500;
+  min-width: 120px;
+}
+
+.auth-tabs ::ng-deep .mat-tab-label-active {
+  color: var(--accent-gold) !important;
+}
+
+.auth-tabs ::ng-deep .mat-ink-bar {
+  background-color: var(--accent-gold) !important;
+}
+
+/* ========================================
+   FORM STYLING
+   ======================================== */
+.auth-form {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--bg-primary);
+}
+
+.auth-field {
+  width: 100%;
+}
+
+.auth-field ::ng-deep .mat-form-field-outline {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.auth-field ::ng-deep .mat-form-field-label {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.auth-field ::ng-deep .mat-input-element {
+  color: #ffffff !important;
+}
+
+.auth-field ::ng-deep .mat-form-field-outline-thick {
+  color: var(--accent-gold) !important;
+}
+
+.auth-field mat-icon {
+  color: var(--accent-gold) !important;
+}
+
+/* ========================================
+   BUTTON STYLING
+   ======================================== */
+.auth-button {
+  width: 100%;
+  height: 48px;
+  font-weight: 600;
+  border-radius: 8px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.auth-button--primary {
+  background-color: var(--accent-green) !important;
+  color: #ffffff !important;
+}
+
+.auth-button--primary:hover {
+  background-color: #0d9488 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.auth-button--accent {
+  background-color: var(--accent-gold) !important;
+  color: #ffffff !important;
+}
+
+.auth-button--accent:hover {
+  background-color: #d97706 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+.auth-button:disabled {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.3) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ========================================
+   ACTIONS STYLING
+   ======================================== */
+.auth-actions {
+  padding: 16px 24px;
+  background: var(--bg-secondary);
+  justify-content: center;
+}
+
+.auth-cancel {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-weight: 500 !important;
+  border-radius: 50px !important; /* ✅ Súper redondeado */
+  padding: 10px 28px !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)) !important; /* ✅ Gradiente sutil */
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(10px) !important; /* ✅ Efecto glass */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.auth-cancel:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-2px) scale(1.02) !important; /* ✅ Efecto scale */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 480px) {
+  .auth-form {
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .auth-title {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+  
+  .auth-button {
+    height: 44px;
+  }
+}

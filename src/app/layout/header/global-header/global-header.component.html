@@ -1,0 +1,26 @@
+<!-- Header/Toolbar -->
+<mat-toolbar color="primary">
+  <div class="brand">
+    <span class="brand-icon">🚀</span>
+    <span class="brand-text">Crypto Tracker</span>
+  </div>
+  
+  <span class="spacer"></span>
+  
+  <div class="nav-buttons">
+    <button mat-button class="nav-button">
+      <mat-icon>show_chart</mat-icon>
+      <span>Portfolio</span>
+    </button>
+    
+    <button mat-button class="nav-button">
+      <mat-icon>notifications</mat-icon>
+      <span>Alerts</span>
+    </button>
+    
+    <button mat-raised-button class="login-button" (click)="openAuthModal()">
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </button>
+  </div>
+</mat-toolbar>
