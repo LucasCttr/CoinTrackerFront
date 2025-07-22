@@ -1,4 +1,4 @@
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '@angular/material/prebuilt-themes/azure-blue.css';
 
 /* Reset de estilos globales */
 * {
@@ -22,7 +22,230 @@ body {
 :root {
   --bg-primary: #17223d;
   --bg-secondary: #1e293b;
+  --bg-light: #5a7294;
   --accent-green: #10b981;
   --accent-red: #ef4444;
   --accent-gold: #f59e0b;
 }
+
+/* ========================================
+   FORM FIELDS GLOBALES - BORDES BLANCOS
+   ======================================== */
+
+/* Solo si quieres mantener colores crypto */
+.crypto-modal .mat-mdc-dialog-container {
+  background: #1e293b;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.crypto-modal .mat-mdc-tab .mdc-tab__text-label {
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.2s ease !important;
+}
+
+.crypto-modal .mat-mdc-tab:hover .mdc-tab__text-label {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.crypto-modal .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  color: #ffffff !important;
+}
+
+/* Estado activo + hover */
+.crypto-modal .mat-mdc-tab.mdc-tab--active:hover .mdc-tab__text-label {
+  color: #ffffff !important;
+}
+
+/* Línea indicadora siempre blanca */
+.crypto-modal .mat-mdc-tab-indicator .mdc-tab-indicator__content,
+.crypto-modal .mdc-tab-indicator__content--underline {
+  background-color: #ffffff !important;
+  border-top-color: #ffffff !important;
+}
+
+/* ========================================
+   FORM FIELDS - BORDES Y LABELS
+   ======================================== */
+
+/* Bordes normales (gris claro) */
+.crypto-modal .mat-mdc-form-field .mdc-notched-outline .mdc-notched-outline__leading,
+.crypto-modal .mat-mdc-form-field .mdc-notched-outline .mdc-notched-outline__notch,
+.crypto-modal .mat-mdc-form-field .mdc-notched-outline .mdc-notched-outline__trailing {
+  border-color: rgba(255, 255, 255, 0.555) !important; /* Gris claro */
+  border-width: 1px !important;
+}
+
+/* Bordes cuando está enfocado (BLANCO PURO) */
+.crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mdc-notched-outline .mdc-notched-outline__leading,
+.crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mdc-notched-outline .mdc-notched-outline__notch,
+.crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mdc-notched-outline .mdc-notched-outline__trailing {
+  border-color: #ffffff !important; /* 🔥 BLANCO PURO */
+  border-width: 2px !important;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3) !important; /* Brillo sutil */
+}
+
+/* Labels normales (gris claro) */
+.crypto-modal .mat-mdc-form-field .mat-mdc-floating-label {
+  color: rgba(255, 255, 255, 0.6) !important; /* Gris claro */
+}
+
+/* Labels cuando está enfocado (BLANCO PURO) */
+.crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mat-mdc-floating-label {
+  color: #ffffff !important; /* 🔥 BLANCO PURO */
+}
+
+/* Texto del input (blanco siempre) */
+.crypto-modal .mat-mdc-form-field .mat-mdc-input-element {
+  color: #ffffff !important;
+}
+
+/* Iconos (gris claro) */
+.crypto-modal .mat-mdc-form-field .mat-icon {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Iconos cuando el field está enfocado (BLANCO PURO) */
+.crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mat-icon {
+  color: #ffffff !important; /* 🔥 BLANCO PURO */
+}
+
+/* Placeholder (gris muy claro) */
+.crypto-modal .mat-mdc-form-field .mat-mdc-input-element::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Botón de visibility toggle */
+.crypto-modal .mat-mdc-form-field button[mat-icon-button] .mat-icon {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.crypto-modal .mat-mdc-form-field button[mat-icon-button]:hover .mat-icon {
+  color: #ffffff !important;
+}
+
+/* Estados de error (rojo) */
+.crypto-modal .mat-mdc-form-field.mat-form-field-invalid .mdc-notched-outline .mdc-notched-outline__leading,
+.crypto-modal .mat-mdc-form-field.mat-form-field-invalid .mdc-notched-outline .mdc-notched-outline__notch,
+.crypto-modal .mat-mdc-form-field.mat-form-field-invalid .mdc-notched-outline .mdc-notched-outline__trailing {
+  border-color: var(--accent-red) !important;
+}
+
+.crypto-modal .mat-mdc-form-field.mat-form-field-invalid .mat-mdc-floating-label {
+  color: var(--accent-red) !important;
+}
+
+/* ========================================
+   AUTOFILL/AUTOCOMPLETE - FONDO TRANSPARENTE
+   ======================================== */
+
+/* Elimina el fondo blanco del autofill */
+.crypto-modal .mat-mdc-form-field .mat-mdc-input-element:-webkit-autofill,
+.crypto-modal .mat-mdc-form-field .mat-mdc-input-element:-webkit-autofill:hover,
+.crypto-modal .mat-mdc-form-field .mat-mdc-input-element:-webkit-autofill:focus,
+.crypto-modal .mat-mdc-form-field .mat-mdc-input-element:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #1e293b inset !important; /* Fondo del modal */
+  -webkit-text-fill-color: #ffffff !important; /* Texto blanco */
+  box-shadow: 0 0 0 30px #1e293b inset !important;
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Autofill en modo enfocado */
+.crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mat-mdc-input-element:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #1e293b inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Elimina el outline azul del autofill */
+.crypto-modal .mat-mdc-form-field .mat-mdc-input-element:-webkit-autofill:focus {
+  outline: none !important;
+}
+
+/* ========================================
+   CURSOR/CARET - BARRA QUE TITILA BLANCA
+   ======================================== */
+
+/* Cursor blanco en todos los inputs del modal */
+.crypto-modal .mat-mdc-form-field .mat-mdc-input-element {
+  caret-color: #ffffff !important; /* 🔥 CURSOR BLANCO */
+}
+
+/* Cursor blanco cuando está enfocado */
+.crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mat-mdc-input-element {
+  caret-color: #ffffff !important; /* 🔥 CURSOR BLANCO */
+}
+
+/* Selección de texto en azul claro */
+.crypto-modal .mat-mdc-form-field .mat-mdc-input-element::selection {
+  background-color: rgba(255, 255, 255, 0.3) !important; /* Selección semi-transparente */
+  color: #ffffff !important;
+}
+
+/* Para Firefox */
+.crypto-modal .mat-mdc-form-field .mat-mdc-input-element::-moz-selection {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+}
+
+/* ========================================
+   SOBRESCRIBE EL CONTENEDOR DEL DIALOG
+   ======================================== */
+
+/* O si quieres esquinas pero más sutiles */
+.crypto-modal .mat-mdc-dialog-container {
+  background: #1e293b !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 12px !important; /* 🔥 Esquinas redondeadas */
+}
+
+/* También fuerza el contenido interno */
+.crypto-modal .mat-mdc-dialog-container .mat-mdc-dialog-surface {
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+/* Asegura que no haya padding extra en el contenedor */
+.crypto-modal .mat-mdc-dialog-container {
+  padding: 0 !important;
+}
+
+.crypto-modal .mat-mdc-dialog-container .mat-mdc-dialog-content {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ========================================
+   BOTONES MÁS REDONDOS EN MODAL
+   ======================================== */
+
+/* Botones principales (Login/Register) */
+.crypto-modal button[mat-raised-button] {
+  border-radius: 12px !important; /* 🔥 MÁS REDONDO */
+  height: 48px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Botón cancelar */
+.crypto-modal button[mat-button] {
+  border-radius: 10px !important; /* 🔥 MÁS REDONDO */
+  padding: 5px 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: all 0.2s ease;
+}
+
+.crypto-modal button[mat-button]:hover {
+  border-radius: 12px !important; /* Aún más redondo en hover */
+  color: var(--accent-red) !important;
+  border-color: var(--accent-red) !important;
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  transform: scale(1.02);
+}
+
+.crypto-modal button[mat-stroked-button]:hover {
+  border-radius: 14px !important; /* Extra redondo en hover */
+  transform: scale(1.02);
+}
+

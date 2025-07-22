@@ -19,15 +19,17 @@ export class GlobalHeaderComponent {
 
   openAuthModal(): void {
     const dialogRef = this.dialog.open(AuthModalComponent, {
-      width: '450px',
+      width: '420px', 
       maxWidth: '90vw',
-      panelClass: 'auth-modal-panel'
+      disableClose: false,
+      autoFocus: true,
+      restoreFocus: true,
+      panelClass: 'crypto-modal' // Clase para estilos personalizados
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('Auth result:', result);
-        // Manejar el resultado del login/register
+        console.log('Modal cerrado con resultado:', result);
       }
     });
   }

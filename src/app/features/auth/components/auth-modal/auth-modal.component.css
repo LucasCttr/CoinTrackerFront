@@ -1,181 +1,167 @@
 /* ========================================
-   AUTH MODAL CONTAINER
+   AUTH MODAL - SOLO LAYOUT BÁSICO
    ======================================== */
+
 .auth-modal {
-  background: var(--bg-primary);
+  /* Estilos generales del modal */
+  background-color: var(--bg-secondary); /* Fondo oscuro semi-transparente */
   border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 20px 20px 5px 20px; /* 🔥 UNIFICADO: top right bottom left */;
 }
 
-/* ========================================
-   TITLE STYLES
-   ======================================== */
-.auth-title {
+.dialog-content {
+  width: 380px; /* 🔥 REDUCE TAMBIÉN AQUÍ */
+  max-width: 90vw;
+  max-height: 80vh; /* Limita altura */
+  overflow-y: auto; /* Scroll solo si es necesario */ 
+}
+
+h2[mat-dialog-title] {
   text-align: center;
-  color: var(--accent-gold) !important;
-  font-weight: 600;
-  margin-bottom: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  margin-bottom: 0px;
+  font-size: 1.5rem;
+  color: #ffffff; /* Título en blanco */
 }
 
-.auth-title mat-icon {
+h2[mat-dialog-title] mat-icon {
   font-size: 28px;
-  color: var(--accent-gold);
 }
 
-/* ========================================
-   TABS STYLING
-   ======================================== */
-.auth-tabs {
-  background: transparent;
-}
-
-.auth-tabs ::ng-deep .mat-tab-header {
-  background: var(--bg-secondary);
-  border-radius: 8px 8px 0 0;
-}
-
-.auth-tabs ::ng-deep .mat-tab-label {
-  color: #ffffff !important;
-  font-weight: 500;
-  min-width: 120px;
-}
-
-.auth-tabs ::ng-deep .mat-tab-label-active {
-  color: var(--accent-gold) !important;
-}
-
-.auth-tabs ::ng-deep .mat-ink-bar {
-  background-color: var(--accent-gold) !important;
-}
-
-/* ========================================
-   FORM STYLING
-   ======================================== */
 .auth-form {
-  padding: 24px;
+  padding: 25px 20px 20px 20px; /* 🔥 REDUCE PADDING DE 24px A 20px */
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  background: var(--bg-primary);
+  gap: 5px; /* 🔥 REDUCE GAP DE 16px A 14px */
+  min-height: 180px; /* 🔥 REDUCE DE 300px A 280px */
 }
 
-.auth-field {
-  width: 100%;
+/* Botones más compactos */
+button[mat-raised-button] {
+  height: 44px; /* 🔥 REDUCE DE 48px A 44px */
 }
 
-.auth-field ::ng-deep .mat-form-field-outline {
-  color: rgba(255, 255, 255, 0.3) !important;
+button[mat-raised-button]:disabled {
+  opacity: 0.6;
 }
 
-.auth-field ::ng-deep .mat-form-field-label {
-  color: rgba(255, 255, 255, 0.7) !important;
-}
-
-.auth-field ::ng-deep .mat-input-element {
-  color: #ffffff !important;
-}
-
-.auth-field ::ng-deep .mat-form-field-outline-thick {
-  color: var(--accent-gold) !important;
-}
-
-.auth-field mat-icon {
-  color: var(--accent-gold) !important;
+/* Para subir más el botón */
+div[mat-dialog-actions] {
+  margin-top: -14px !important; /* 🔥 SUBE MÁS */
 }
 
 /* ========================================
-   BUTTON STYLING
+   FIX BOTÓN CONTRASEÑA - SIN FONDO BLANCO
    ======================================== */
-.auth-button {
-  width: 100%;
-  height: 48px;
-  font-weight: 600;
-  border-radius: 8px;
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.3s ease;
+
+/* Elimina fondo blanco del botón */
+.auth-form mat-form-field button[mat-icon-button] {
+  background-color: transparent !important; /* 🔥 SIN FONDO */
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-.auth-button--primary {
-  background-color: var(--accent-green) !important;
+/* Icono gris */
+.auth-form mat-form-field button[mat-icon-button] mat-icon {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 20px !important;
+}
+
+/* Hover sutil */
+.auth-form mat-form-field button[mat-icon-button]:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important; /* 🔥 HOVER TRANSPARENTE */
+  border-radius: 4px !important;
+}
+
+.auth-form mat-form-field button[mat-icon-button]:hover mat-icon {
   color: #ffffff !important;
 }
 
-.auth-button--primary:hover {
-  background-color: #0d9488 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-}
-
-.auth-button--accent {
-  background-color: var(--accent-gold) !important;
-  color: #ffffff !important;
-}
-
-.auth-button--accent:hover {
-  background-color: #d97706 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-}
-
-.auth-button:disabled {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: rgba(255, 255, 255, 0.3) !important;
-  transform: none !important;
+/* Quita cualquier sombra o borde del Material */
+.auth-form mat-form-field button[mat-icon-button].mat-mdc-icon-button {
+  background-color: transparent !important;
   box-shadow: none !important;
 }
 
 /* ========================================
-   ACTIONS STYLING
+   ALINEACIÓN DE ICONOS - MISMO TAMAÑO Y POSICIÓN
    ======================================== */
-.auth-actions {
-  padding: 16px 24px;
-  background: var(--bg-secondary);
-  justify-content: center;
+
+/* Todos los iconos de suffix del mismo tamaño */
+.auth-form mat-form-field .mat-mdc-form-field-suffix {
+  display: flex !important;
+  align-items: center !important;
+  width: 40px !important; /* 🔥 MISMO ANCHO PARA TODOS */
+  justify-content: center !important;
 }
 
-.auth-cancel {
-  color: rgba(255, 255, 255, 0.8) !important;
-  font-weight: 500 !important;
-  border-radius: 50px !important; /* ✅ Súper redondeado */
-  padding: 10px 28px !important;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)) !important; /* ✅ Gradiente sutil */
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: blur(10px) !important; /* ✅ Efecto glass */
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+/* Icono del email */
+.auth-form mat-form-field mat-icon[matSuffix] {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  color: rgba(255, 255, 255, 0.6) !important;
 }
 
-.auth-cancel:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)) !important;
+/* Botón del ojo - mismo tamaño que el icono del email */
+.auth-form mat-form-field button[mat-icon-button] {
+  background-color: transparent !important;
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important; /* 🔥 SIN MARGEN PARA ALINEAR */
+}
+
+/* Icono dentro del botón - mismo tamaño */
+.auth-form mat-form-field button[mat-icon-button] mat-icon {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 20px !important; /* 🔥 MISMO TAMAÑO QUE EL EMAIL */
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* Hover manteniendo alineación */
+.auth-form mat-form-field button[mat-icon-button]:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+.auth-form mat-form-field button[mat-icon-button]:hover mat-icon {
   color: #ffffff !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-  transform: translateY(-2px) scale(1.02) !important; /* ✅ Efecto scale */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
 }
 
-/* ========================================
-   RESPONSIVE DESIGN
-   ======================================== */
+/* Fuerza alineación perfecta */
+.auth-form mat-form-field .mat-mdc-form-field-infix {
+  padding-right: 40px !important; /* 🔥 ESPACIO CONSISTENTE */
+}
+
+
+/* Responsive */
 @media (max-width: 480px) {
-  .auth-form {
-    padding: 16px;
-    gap: 16px;
+  .dialog-content {
+    width: 100%;
   }
   
-  .auth-title {
+  .auth-form {
+    padding: 16px;
+    gap: 12px;
+  }
+  
+  h2[mat-dialog-title] {
     font-size: 1.2rem;
     margin-bottom: 16px;
   }
   
-  .auth-button {
+  button[mat-raised-button] {
     height: 44px;
   }
 }
+

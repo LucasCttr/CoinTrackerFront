@@ -56,13 +56,14 @@ mat-toolbar {
   font-size: 20px;
   width: 20px;
   height: 20px;
+  color:#fff;
 }
 
-/* .nav-button span {
+.nav-button span {
   font-size: 0.9rem;
   color: #fff;
   display: inline-block;
-} */
+}
 
 .nav-button:hover {
   background-color: rgba(255, 255, 255, 0.1);
@@ -79,11 +80,23 @@ mat-toolbar {
   padding: 8px 24px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  color: #000000 !important; /* 🔥 TEXTO NEGRO */
 }
 
 .login-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  color: var(--bg-secondary) !important; /* 🔥 TEXTO NEGRO EN HOVER */
+}
+
+/* Para el icono también */
+.login-button mat-icon {
+  color: var(--bg-secondary) !important; /* 🔥 ICONO NEGRO */
+}
+
+/* Si el botón tiene span interno */
+.login-button span {
+  color: var(--bg-secondary) !important; /* 🔥 TEXTO NEGRO */
 }
 
 /* ========================================
