@@ -7,11 +7,24 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button'; // 🔥 AGREGA ESTO
+import { CommonModule } from '@angular/common'; // 🔥 AGREGA ESTO
 
+// Importa el AuthService
+import { AuthService } from '../../services/auth.service'; // 🔥 AGREGA ESTO
 
 @Component({
   selector: 'app-auth-modal',
-  imports: [ MatDialogModule, MatTabsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatIcon ],
+  imports: [ 
+    MatDialogModule, 
+    MatTabsModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    ReactiveFormsModule, 
+    MatIcon,
+    MatButtonModule, // 🔥 AGREGA ESTO
+    CommonModule // 🔥 AGREGA ESTO
+  ],
   templateUrl: './auth-modal.component.html',
   styleUrls: ['./auth-modal.component.css']
 })
@@ -19,10 +32,13 @@ export class AuthModalComponent implements OnInit {
   loginForm!: FormGroup;
   registerForm!: FormGroup;
   hidePassword = true;
+  isLoading = false; // 🔥 AGREGA ESTADO DE CARGA
+  errorMessage = ''; // 🔥 AGREGA MANEJO DE ERRORES
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<AuthModalComponent>
+    private dialogRef: MatDialogRef<AuthModalComponent>,
+    private authService: AuthService // 🔥 INYECTA EL AUTHSERVICE
   ) {}
 
   ngOnInit(): void {
@@ -43,23 +59,88 @@ export class AuthModalComponent implements OnInit {
     });
   }
 
+  // ========================================
+  // MÉTODOS ACTUALIZADOS CON AUTHSERVICE
+  // ========================================
+
   onLogin(): void {
     if (this.loginForm.valid) {
-      console.log('Login data:', this.loginForm.value);
-      // Aquí irá tu lógica de login
-      this.dialogRef.close({ action: 'login', data: this.loginForm.value });
+      this.isLoading = true;
+      this.errorMessage = '';
+      
+      // USA EL AUTHSERVICE PARA LOGIN
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (response) => {
+          console.log('✅ Login exitoso:', response);
+          this.dialogRef.close({ success: true, action: 'login', user: response.name });
+        },
+        error: (error) => {
+          console.error('❌ Error en login:', error);
+          this.errorMessage = error.message || 'Error al iniciar sesión';
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+    } else {
+      this.markFormGroupTouched(this.loginForm);
     }
   }
 
   onRegister(): void {
     if (this.registerForm.valid) {
-      console.log('Register data:', this.registerForm.value);
-      // Aquí irá tu lógica de registro
-      this.dialogRef.close({ action: 'register', data: this.registerForm.value });
+      // Validación de contraseñas
+      if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
+        this.errorMessage = 'Las contraseñas no coinciden';
+        return;
+      }
+
+      this.isLoading = true;
+      this.errorMessage = '';
+      
+      //  USA EL AUTHSERVICE PARA REGISTRO
+      this.authService.register(this.registerForm.value).subscribe({
+        next: (response) => {
+          console.log('✅ Registro exitoso:', response);
+          this.dialogRef.close({ success: true, action: 'register', user: response.name });
+        },
+        error: (error) => {
+          console.error('❌ Error en registro:', error);
+          this.errorMessage = error.message || 'Error al registrar usuario';
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+    } else {
+      this.markFormGroupTouched(this.registerForm);
     }
+  }
+
+
+  // ========================================
+  // MÉTODOS DE UTILIDAD
+  // ========================================
+
+  private markFormGroupTouched(formGroup: FormGroup): void {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      control?.markAsTouched({ onlySelf: true });
+    });
+  }
+
+  clearError(): void {
+    this.errorMessage = '';
   }
 
   onClose(): void {
     this.dialogRef.close();
+  }
+
+  // Método para alternar visibilidad de contraseña
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
   }
 }

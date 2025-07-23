@@ -1,36 +1,135 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider'; // 🔥 AGREGA ESTO
+import { CommonModule } from '@angular/common';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from '../../../features/auth/services/auth.service'; 
+import { User } from '../../../shared/models/user.interface'; 
 import { AuthModalComponent } from '../../../features/auth/components/auth-modal/auth-modal.component';
 
 @Component({
   selector: 'app-global-header',
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatToolbarModule, MatIconModule],
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatDividerModule, // 🔥 AGREGA ESTO
+    CommonModule
+  ],
   templateUrl: './global-header.component.html',
-  styleUrl: './global-header.component.css'
+  styleUrls: ['./global-header.component.css']
 })
-export class GlobalHeaderComponent {
-
-  constructor(private dialog: MatDialog) {}
-
+export class GlobalHeaderComponent implements OnInit, OnDestroy {
+  
+  // ========================================
+  // PROPIEDADES REACTIVAS
+  // ========================================
+  
+  currentUser: User | null = null;
+  isAuthenticated = false;
+  isLoading = false;
+  
+  private destroy$ = new Subject<void>();
+  
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private authService: AuthService // 🔥 INYECTA EL AUTHSERVICE
+  ) {}
+  
+  ngOnInit(): void {
+    this.subscribeToAuthState();
+  }
+  
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+  
+  // ========================================
+  // SUSCRIPCIÓN AL ESTADO DE AUTH
+  // ========================================
+  
+  private subscribeToAuthState(): void {
+    // 🔥 ESCUCHA CAMBIOS EN EL USUARIO ACTUAL
+    this.authService.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(user => {
+        this.currentUser = user;
+        console.log('🔍 Usuario actual en header:', user);
+      });
+    
+    // 🔥 ESCUCHA CAMBIOS EN EL ESTADO DE AUTENTICACIÓN
+    this.authService.isAuthenticated$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(isAuth => {
+        this.isAuthenticated = isAuth;
+        console.log('🔍 Estado de autenticación:', isAuth);
+      });
+    
+    // 🔥 ESCUCHA ESTADO DE CARGA
+    this.authService.isLoading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(loading => {
+        this.isLoading = loading;
+      });
+  }
+  
+  // ========================================
+  // MÉTODOS DE NAVEGACIÓN
+  // ========================================
+  
+  navigateHome(): void {
+    this.router.navigate(['/']);
+  }
+  
+  navigateToPortfolio(): void {
+    this.router.navigate(['/portfolio']);
+  }
+  
+  navigateToMarket(): void {
+    this.router.navigate(['/market']);
+  }
+  
+  // ========================================
+  // MÉTODOS DE AUTENTICACIÓN
+  // ========================================
+  
   openAuthModal(): void {
     const dialogRef = this.dialog.open(AuthModalComponent, {
-      width: '420px', 
-      maxWidth: '90vw',
-      disableClose: false,
-      autoFocus: true,
-      restoreFocus: true,
-      panelClass: 'crypto-modal' // Clase para estilos personalizados
+      width: '400px',
+      panelClass: 'crypto-modal',
+      disableClose: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('Modal cerrado con resultado:', result);
+      if (result?.success) {
+        console.log('🎉 Usuario autenticado exitosamente');
+        // No necesitas hacer nada más, los observables se actualizarán automáticamente
       }
     });
+  }
+  
+  logout(): void {
+    this.authService.logout();
+    console.log('👋 Usuario deslogueado');
+  }
+  
+  // ========================================
+  // GETTERS PARA EL TEMPLATE
+  // ========================================
+  
+  get userName(): string {
+    return this.currentUser?.name || this.currentUser?.email?.split('@')[0] || 'Usuario';
+  }
+  
+  get userEmail(): string {
+    return this.currentUser?.email || '';
   }
 }

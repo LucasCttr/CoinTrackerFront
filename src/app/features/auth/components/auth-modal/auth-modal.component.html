@@ -1,74 +1,98 @@
-<div class="auth-modal">
-  <div mat-dialog-content class="dialog-content">
-    <h2 mat-dialog-title>
-      <mat-icon>rocket_launch</mat-icon>
-      Crypto Tracker
-    </h2>
-    
-    <mat-tab-group>
-      <!-- TAB LOGIN -->
-      <mat-tab label="Login">
-        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="auth-form">
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input matInput type="email" formControlName="email" placeholder="tu@email.com">
-            <mat-icon matSuffix>email</mat-icon>
-          </mat-form-field>
-          
-          <mat-form-field appearance="outline">
-            <mat-label>Contraseña</mat-label>
-            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
-            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
-              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-          </mat-form-field>
-          
-          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
-            <mat-icon>login</mat-icon>
-            Iniciar Sesión
-          </button>
-        </form>
-      </mat-tab>
-      
-      <!-- TAB REGISTER -->
-      <mat-tab label="Register">
-        <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="auth-form">
-          <mat-form-field appearance="outline">
-            <mat-label>Nombre</mat-label>
-            <input matInput formControlName="name" placeholder="Tu nombre completo">
-            <mat-icon matSuffix>person</mat-icon>
-          </mat-form-field>
+<div class="auth-modal dialog-content">
+  <h2 mat-dialog-title>
+    <mat-icon>currency_bitcoin</mat-icon>
+    CoinTracker
+  </h2>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input matInput type="email" formControlName="email" placeholder="tu@email.com">
-            <mat-icon matSuffix>email</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Contraseña</mat-label>
-            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
-            <mat-icon matSuffix>lock</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Confirmar Contraseña</mat-label>
-            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="confirmPassword">
-            <mat-icon matSuffix>lock_outline</mat-icon>
-          </mat-form-field>
-          
-          <button mat-raised-button color="accent" type="submit" [disabled]="registerForm.invalid">
-            <mat-icon>person_add</mat-icon>
-            Registrarse
-          </button>
-          
-        </form>
-      </mat-tab>
-    </mat-tab-group>
+  <!-- 🔥 MOSTRAR ERRORES -->
+  <div *ngIf="errorMessage" class="error-message">
+    <mat-icon>error</mat-icon>
+    {{ errorMessage }}
+    <button mat-icon-button (click)="clearError()">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
-  
-  <div mat-dialog-actions align="center">
-    <button mat-button (click)="onClose()">
+
+  <mat-tab-group>
+    <!-- TAB LOGIN -->
+    <mat-tab label="Login">
+      <form [formGroup]="loginForm" class="auth-form" (ngSubmit)="onLogin()">
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" [readonly]="isLoading">
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" [readonly]="isLoading">
+          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button" [disabled]="isLoading">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <!-- 🔥 BOTONES CON ESTADO DE CARGA -->
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit"
+          [disabled]="loginForm.invalid || isLoading">
+          <mat-icon *ngIf="isLoading">hourglass_empty</mat-icon>
+          <mat-icon *ngIf="!isLoading">login</mat-icon>
+          {{ isLoading ? 'Iniciando...' : 'Iniciar Sesión' }}
+        </button>
+
+        
+      </form>
+    </mat-tab>
+
+    <!-- TAB REGISTER -->
+    <mat-tab label="Register">
+      <form [formGroup]="registerForm" class="auth-form" (ngSubmit)="onRegister()">
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" formControlName="name" [readonly]="isLoading">
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" [readonly]="isLoading">
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" [readonly]="isLoading">
+          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button" [disabled]="isLoading">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Confirmar Contraseña</mat-label>
+          <input matInput type="password" formControlName="confirmPassword" [readonly]="isLoading">
+          <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit"
+          [disabled]="registerForm.invalid || isLoading">
+          <mat-icon *ngIf="isLoading">hourglass_empty</mat-icon>
+          <mat-icon *ngIf="!isLoading">person_add</mat-icon>
+          {{ isLoading ? 'Registrando...' : 'Registrarse' }}
+        </button>
+        
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onClose()" [disabled]="isLoading">
       <mat-icon>close</mat-icon>
       Cancelar
     </button>
