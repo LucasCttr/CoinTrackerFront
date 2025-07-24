@@ -1,45 +1,93 @@
 <!-- Main Content -->
 <div class="dashboard-container">
-  <h1>Top Cryptocurrencies</h1>
   
-  <div class="crypto-grid">
-    <!-- Bitcoin Card -->
-    <mat-card class="crypto-card">
-      <mat-card-header>
-        <div mat-card-avatar class="bitcoin-avatar">₿</div>
-        <mat-card-title>Bitcoin</mat-card-title>
-        <mat-card-subtitle>BTC</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="price">$45,123.45</div>
-        <div class="change positive">+2.34%</div>
-      </mat-card-content>
-    </mat-card>
-
-    <!-- Ethereum Card -->
-    <mat-card class="crypto-card">
-      <mat-card-header>
-        <div mat-card-avatar class="ethereum-avatar">Ξ</div>
-        <mat-card-title>Ethereum</mat-card-title>
-        <mat-card-subtitle>ETH</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="price">$2,987.12</div>
-        <div class="change negative">-1.23%</div>
-      </mat-card-content>
-    </mat-card>
-
-    <!-- Cardano Card -->
-    <mat-card class="crypto-card">
-      <mat-card-header>
-        <div mat-card-avatar class="cardano-avatar">₳</div>
-        <mat-card-title>Cardano</mat-card-title>
-        <mat-card-subtitle>ADA</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="price">$0.456</div>
-        <div class="change positive">+5.67%</div>
-      </mat-card-content>
-    </mat-card>
+  <!-- 🔥 HEADER CON BOTÓN DE REFRESH -->
+  <div class="dashboard-header">
+    <h1>Top Cryptocurrencies</h1>
+    <button 
+      mat-icon-button 
+      (click)="onRefresh()" 
+      [disabled]="isLoading"
+      matTooltip="Refrescar datos">
+      <mat-icon>refresh</mat-icon>
+    </button>
   </div>
+
+  <!-- 🔥 LOADING STATE -->
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Cargando cryptocurrencies...</p>
+  </div>
+
+  <!-- 🔥 ERROR STATE -->
+  <div *ngIf="error && !isLoading" class="error-container">
+    <mat-icon color="warn">error</mat-icon>
+    <p>{{ error }}</p>
+    <button mat-raised-button color="primary" (click)="onRefresh()">
+      Reintentar
+    </button>
+  </div>
+
+  <!-- 🔥 SUCCESS STATE - CRYPTO GRID -->
+  <div *ngIf="!isLoading && !error && coins.length > 0" class="crypto-grid">
+    
+    <mat-card 
+      *ngFor="let coin of coins; trackBy: trackByCoinId" 
+      class="crypto-card">
+      
+      <mat-card-header>
+        <!-- 🔥 IMAGEN REAL DE LA CRYPTO -->
+        <img 
+          mat-card-avatar 
+          [src]="coin.image" 
+          [alt]="coin.name"
+          class="crypto-avatar">
+        
+        <!-- 🔥 USAR CAMPOS CORRECTOS -->
+        <mat-card-title>{{ coin.name }}</mat-card-title>
+        <mat-card-subtitle>{{ coin.symbolUppercase }}</mat-card-subtitle>
+        
+        <!-- 🔥 RANKING -->
+        <div class="ranking-badge" *ngIf="coin.marketCapRank">
+          #{{ coin.marketCapRank }}
+        </div>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <!-- 🔥 PRECIO FORMATEADO (YA NO USAS coin.price) -->
+        <div class="price">{{ coin.formattedPrice }}</div>
+        
+        <!-- 🔥 CAMBIO PORCENTUAL FORMATEADO (YA NO USAS coin.change) -->
+        <div 
+          class="change"
+          [ngClass]="coin.priceChangeClass">
+          {{ coin.formattedPercentage }}
+        </div>
+        
+        <!-- 🔥 INFO ADICIONAL (OPCIONAL) -->
+        <div class="additional-info" *ngIf="coin.marketCap">
+          <small>Market Cap: {{ coin.marketCap | currency:'USD':'symbol':'1.0-0' }}</small>
+        </div>
+      </mat-card-content>
+      
+      <!-- 🔥 ACCIONES (OPCIONAL) -->
+      <mat-card-actions align="end">
+        <button mat-button (click)="onCoinClick(coin)">
+          VER DETALLES
+        </button>
+      </mat-card-actions>
+      
+    </mat-card>
+    
+  </div>
+
+  <!-- 🔥 NO DATA STATE -->
+  <div *ngIf="!isLoading && !error && coins.length === 0" class="no-data-container">
+    <mat-icon>info</mat-icon>
+    <p>No hay datos de cryptocurrencies disponibles</p>
+    <button mat-raised-button color="primary" (click)="onRefresh()">
+      Cargar datos
+    </button>
+  </div>
+
 </div>

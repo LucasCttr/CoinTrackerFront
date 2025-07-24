@@ -29,7 +29,7 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
-  private isInitializedSubject = new BehaviorSubject<boolean>(false); // 🔥 NUEVO
+  private isInitializedSubject = new BehaviorSubject<boolean>(false); 
 
   // Observables públicos
   public currentUser$ = this.currentUserSubject.asObservable();
@@ -62,7 +62,7 @@ export class AuthService {
   }
   
   get token(): string | null {
-    // 🔥 VERIFICACIÓN DE BROWSER
+    // VERIFICACIÓN DE BROWSER
     if (typeof window !== 'undefined' && window.localStorage) {
       return localStorage.getItem(this.TOKEN_KEY);
     }
