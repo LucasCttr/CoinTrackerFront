@@ -1,12 +1,12 @@
-// 🔥 1. DATOS RAW DEL BACKEND (snake_case como viene del servidor)
+
 export interface CoinResponse {
   id: string;
   symbol: string;
   name: string;
   image: string;
-  current_price: number;                    // 🔥 snake_case
-  price_change_percentage_24h: number;      // 🔥 snake_case
-  market_cap_rank: number;                  // 🔥 snake_case
+  current_price: number;                   
+  price_change_percentage_24h: number;      
+  market_cap_rank: number;                 
   market_cap: number;
   total_volume: number;
   high_24h: number;
@@ -32,22 +32,22 @@ export interface PaginatedResponse<T> {
   data: T[];
   currentPage: number;
   totalPages: number;
-  totalItems: number;        // 🔥 Tu backend usa "totalItems" no "totalCount"
+  totalItems: number;        // Tu backend usa "totalItems" no "totalCount"
   pageSize: number;
   hasNextPage: boolean;
   hasPreviousPage: boolean;
 }
 
-// 🔥 3. DATOS FORMATEADOS PARA LA UI (camelCase para frontend)
+// DATOS FORMATEADOS PARA LA UI (camelCase para frontend)
 export interface FormattedCoin {
   // Campos originales mapeados
   id: string;
   symbol: string;
   name: string;
   image: string;
-  currentPrice: number;                     // 🔥 Mapeado de current_price
-  priceChangePercentage24h: number;         // 🔥 Mapeado de price_change_percentage_24h
-  marketCapRank: number;                    // 🔥 Mapeado de market_cap_rank
+  currentPrice: number;                     // Mapeado de current_price
+  priceChangePercentage24h: number;         // Mapeado de price_change_percentage_24h
+  marketCapRank: number;                    // Mapeado de market_cap_rank
   
   // Campos formateados para UI
   formattedPrice: string;                   // "$3,636.01"
@@ -63,12 +63,12 @@ export interface FormattedCoin {
   priceChange24h: number;
 }
 
-// 🔥 4. ALIASES ÚTILES
+// ALIASES ÚTILES
 export type PaginatedCoins = PaginatedResponse<CoinResponse>;
 export type CoinList = CoinResponse[];
 export type FormattedCoinList = FormattedCoin[];
 
-// 🔥 5. PARÁMETROS DE BÚSQUEDA/FILTRADO
+// PARÁMETROS DE BÚSQUEDA/FILTRADO
 export interface CoinSearchParams {
   page?: number;
   pageSize?: number;
@@ -77,7 +77,7 @@ export interface CoinSearchParams {
   search?: string;
 }
 
-// 🔥 6. RESPUESTA DE LA API (para el HTTP client)
+// RESPUESTA DE LA API (para el HTTP client)
 export interface ApiResponse {
   data: CoinResponse[];
   currentPage: number;
@@ -86,4 +86,12 @@ export interface ApiResponse {
   pageSize: number;
   hasNextPage: boolean;
   hasPreviousPage: boolean;
+}
+
+// RESPUESTA PARA PAGINACIÓN INFINITA
+export interface InfiniteScrollResponse<T> {
+  data: T[];
+  nextCursor?: string;
+  hasMore: boolean;
+  count: number;
 }

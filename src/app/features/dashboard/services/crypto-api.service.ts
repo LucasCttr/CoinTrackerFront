@@ -8,7 +8,8 @@ import {
   PaginatedCoins,
   FormattedCoin,
   CoinSearchParams,
-  ApiResponse
+  ApiResponse,
+  InfiniteScrollResponse
 } from '../interfaces/crypto.interface';
 
 @Injectable({
@@ -18,7 +19,7 @@ export class CryptoService {
   
   private readonly API_URL = 'http://localhost:5004/api/coins';
   
-  // 🔥 ESTADO TIPADO
+  // ESTADO TIPADO
   private allCoinsSubject = new BehaviorSubject<CoinResponse[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
   private errorSubject = new BehaviorSubject<string | null>(null);
@@ -30,8 +31,28 @@ export class CryptoService {
 
   constructor(private http: HttpClient) {}
 
-  // 🔥 MÉTODO PRINCIPAL TIPADO
-  loadInitialCoins(pageSize: number = 20): Observable<ApiResponse> {
+    // 🔥 MÉTODO PARA PAGINACIÓN INFINITA
+    loadCoinsWithCursor(limit: number = 20, cursor: string | null = null): Observable<InfiniteScrollResponse<CoinResponse>> {
+      this.setLoading(true);
+      this.clearError();
+      let httpParams = new HttpParams()
+        .set('limit', limit.toString());
+      if (cursor) {
+        httpParams = httpParams.set('cursor', cursor);
+      }
+      return this.http.get<InfiniteScrollResponse<CoinResponse>>(this.API_URL, { params: httpParams })
+        .pipe(
+          tap(response => {
+            // No actualiza el BehaviorSubject, solo retorna los datos
+            console.log('🔍 InfiniteScroll response:', response);
+          }),
+          catchError(error => this.handleError(error)),
+          tap(() => this.setLoading(false))
+        );
+    }
+
+  // MÉTODO PRINCIPAL TIPADO
+  loadInitialCoins(pageSize: number = 30): Observable<ApiResponse> {
     console.log('🔄 Cargando página inicial...');
     
     this.setLoading(true);
@@ -46,7 +67,7 @@ export class CryptoService {
         tap(response => {
           console.log('🔍 Respuesta del servidor:', response);
           
-          // 🔥 VALIDAR ESTRUCTURA CON TYPESCRIPT
+          // VALIDAR ESTRUCTURA CON TYPESCRIPT
           if (!response.data || !Array.isArray(response.data)) {
             throw new Error('Formato de respuesta inválido: falta data array');
           }
@@ -62,7 +83,7 @@ export class CryptoService {
       );
   }
 
-  // 🔥 FORMATEO TIPADO
+  // FORMATEO TIPADO
   getFormattedCoins(): Observable<FormattedCoin[]> {
     return this.allCoins$.pipe(
       map((coins: CoinResponse[]) => {
@@ -73,19 +94,19 @@ export class CryptoService {
         }
         
         const formatted: FormattedCoin[] = coins.map((coin, index) => {
-          // 🔥 LOG DE LA PRIMERA COIN
+          // LOG DE LA PRIMERA COIN
           if (index === 0) {
             console.log('🔍 Primera coin RAW:', coin);
             console.log('🔍 current_price:', coin.current_price);
             console.log('🔍 price_change_percentage_24h:', coin.price_change_percentage_24h);
           }
           
-          // 🔥 USAR LOS CAMPOS CORRECTOS (snake_case del backend)
+          // USAR LOS CAMPOS CORRECTOS (snake_case del backend)
           const price = coin.current_price ?? 0;
           const priceChange = coin.price_change_percentage_24h ?? 0;
           
           const formattedCoin: FormattedCoin = {
-            // 🔥 MAPEO EXPLÍCITO DE CAMPOS
+            // MAPEO EXPLÍCITO DE CAMPOS
             id: coin.id,
             symbol: coin.symbol,
             name: coin.name,
@@ -94,13 +115,13 @@ export class CryptoService {
             priceChangePercentage24h: priceChange,         // snake_case -> camelCase
             marketCapRank: coin.market_cap_rank ?? (index + 1), // snake_case -> camelCase
             
-            // 🔥 CAMPOS FORMATEADOS
+            // CAMPOS FORMATEADOS
             formattedPrice: this.formatCurrency(price),
             formattedPercentage: this.formatPercentage(priceChange),
             priceChangeClass: priceChange >= 0 ? 'positive' : 'negative',
             symbolUppercase: coin.symbol.toUpperCase(),
             
-            // 🔥 CAMPOS ADICIONALES MAPEADOS
+            // CAMPOS ADICIONALES MAPEADOS
             marketCap: coin.market_cap ?? 0,
             totalVolume: coin.total_volume ?? 0,
             high24h: coin.high_24h ?? 0,
@@ -122,7 +143,7 @@ export class CryptoService {
     );
   }
 
-  // 🔥 GETTERS TIPADOS
+  // GETTERS TIPADOS
   get allCoins(): CoinResponse[] {
     return this.allCoinsSubject.value;
   }
@@ -135,7 +156,7 @@ export class CryptoService {
     return this.allCoins.length;
   }
 
-  // 🔥 MÉTODOS PRIVADOS TIPADOS
+  // MÉTODOS PRIVADOS TIPADOS
   private formatCurrency(value: number): string {
     if (!value && value !== 0) return '$0.00';
     
