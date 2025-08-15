@@ -79,7 +79,7 @@ body {
 .crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mdc-notched-outline .mdc-notched-outline__leading,
 .crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mdc-notched-outline .mdc-notched-outline__notch,
 .crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mdc-notched-outline .mdc-notched-outline__trailing {
-  border-color: #ffffff !important; /* 🔥 BLANCO PURO */
+  border-color: #ffffff !important; /* BLANCO PURO */
   border-width: 2px !important;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.3) !important; /* Brillo sutil */
 }
@@ -91,7 +91,7 @@ body {
 
 /* Labels cuando está enfocado (BLANCO PURO) */
 .crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mat-mdc-floating-label {
-  color: #ffffff !important; /* 🔥 BLANCO PURO */
+  color: #ffffff !important; /* BLANCO PURO */
 }
 
 /* Texto del input (blanco siempre) */
@@ -106,7 +106,7 @@ body {
 
 /* Iconos cuando el field está enfocado (BLANCO PURO) */
 .crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mat-icon {
-  color: #ffffff !important; /* 🔥 BLANCO PURO */
+  color: #ffffff !important; /* BLANCO PURO */
 }
 
 /* Placeholder (gris muy claro) */
@@ -167,12 +167,12 @@ body {
 
 /* Cursor blanco en todos los inputs del modal */
 .crypto-modal .mat-mdc-form-field .mat-mdc-input-element {
-  caret-color: #ffffff !important; /* 🔥 CURSOR BLANCO */
+  caret-color: #ffffff !important; /* CURSOR BLANCO */
 }
 
 /* Cursor blanco cuando está enfocado */
 .crypto-modal .mat-mdc-form-field.mdc-text-field--focused .mat-mdc-input-element {
-  caret-color: #ffffff !important; /* 🔥 CURSOR BLANCO */
+  caret-color: #ffffff !important; /* CURSOR BLANCO */
 }
 
 /* Selección de texto en azul claro */
@@ -195,7 +195,7 @@ body {
 .crypto-modal .mat-mdc-dialog-container {
   background: #1e293b !important;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
-  border-radius: 12px !important; /* 🔥 Esquinas redondeadas */
+  border-radius: 12px !important; /* Esquinas redondeadas */
 }
 
 /* También fuerza el contenido interno */
@@ -220,7 +220,7 @@ body {
 
 /* Botones principales (Login/Register) */
 .crypto-modal button[mat-raised-button] {
-  border-radius: 12px !important; /* 🔥 MÁS REDONDO */
+  border-radius: 12px !important; /* MÁS REDONDO */
   height: 48px;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -228,7 +228,7 @@ body {
 
 /* Botón cancelar */
 .crypto-modal button[mat-button] {
-  border-radius: 10px !important; /* 🔥 MÁS REDONDO */
+  border-radius: 10px !important; /* MÁS REDONDO */
   padding: 5px 20px !important;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   background-color: rgba(255, 255, 255, 0.05) !important;

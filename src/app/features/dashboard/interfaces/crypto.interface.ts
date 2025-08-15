@@ -27,7 +27,7 @@ export interface CoinResponse {
   market_cap_change_percentage_24h: number;
 }
 
-// 🔥 2. RESPUESTA PAGINADA DEL BACKEND (coincide con tu backend)
+// RESPUESTA PAGINADA DEL BACKEND (coincide con tu backend)
 export interface PaginatedResponse<T> {
   data: T[];
   currentPage: number;

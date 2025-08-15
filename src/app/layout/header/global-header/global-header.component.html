@@ -9,7 +9,7 @@
   </div>
 
   <!-- ========================================
-       🔥 NAVEGACIÓN - SOLO SI ESTÁ LOGUEADO
+          NAVEGACIÓN - SOLO SI ESTÁ LOGUEADO
        ======================================== -->
   <div *ngIf="isAuthenticated" class="header-nav">
     <button mat-button (click)="navigateToMarket()" class="nav-button">
@@ -27,7 +27,7 @@
   <span class="spacer"></span>
 
   <!-- ========================================
-       🔥 ESTADO: NO AUTENTICADO - BOTÓN LOGIN
+          ESTADO: NO AUTENTICADO - BOTÓN LOGIN
        ======================================== -->
   <div *ngIf="!isAuthenticated" class="auth-section">
     <button 
@@ -47,7 +47,7 @@
   </div>
 
   <!-- ========================================
-       🔥 ESTADO: AUTENTICADO - USUARIO + MENÚ
+          ESTADO: AUTENTICADO - USUARIO + MENÚ
        ======================================== -->
   <div *ngIf="isAuthenticated && currentUser" class="user-section">
     

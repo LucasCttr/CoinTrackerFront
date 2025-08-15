@@ -1,76 +1,58 @@
 <!-- Main Content -->
 <div class="dashboard-container">
   
-  <!-- 🔥 HEADER CON BOTÓN DE REFRESH -->
+  <!-- HEADER CON BOTÓN DE REFRESH -->
   <div class="dashboard-header">
     <h1>Top Cryptocurrencies</h1>
-    <button 
-      mat-icon-button 
-      (click)="onRefresh()" 
-      [disabled]="isLoading"
-      matTooltip="Refrescar datos">
-      <mat-icon>refresh</mat-icon>
-    </button>
   </div>
 
-  <!-- 🔥 LOADING STATE -->
-  <div *ngIf="isLoading" class="loading-container">
-    <mat-spinner diameter="50"></mat-spinner>
-    <p>Cargando cryptocurrencies...</p>
-  </div>
+  <!-- LOADING STATE -->
 
-  <!-- 🔥 ERROR STATE -->
-  <div *ngIf="error && !isLoading" class="error-container">
-    <mat-icon color="warn">error</mat-icon>
-    <p>{{ error }}</p>
-    <button mat-raised-button color="primary" (click)="onRefresh()">
-      Reintentar
-    </button>
-  </div>
+  <!-- ERROR STATE -->
 
-  <!-- 🔥 SUCCESS STATE - CRYPTO GRID -->
-  <div *ngIf="!isLoading && !error && coins.length > 0" class="crypto-grid">
+  <!-- SUCCESS STATE - CRYPTO GRID -->
+  <div *ngIf="!error && ((coins$ | async)?.length ?? 0) > 0" class="crypto-grid">
     
     <mat-card 
-      *ngFor="let coin of coins; trackBy: trackByCoinId" 
+      *ngFor="let coin of coins$ | async; trackBy: trackByCoinId" 
       class="crypto-card">
       
       <mat-card-header>
-        <!-- 🔥 IMAGEN REAL DE LA CRYPTO -->
+        <!-- IMAGEN REAL DE LA CRYPTO -->
         <img 
           mat-card-avatar 
           [src]="coin.image" 
           [alt]="coin.name"
           class="crypto-avatar">
         
-        <!-- 🔥 USAR CAMPOS CORRECTOS -->
+        <!-- USAR CAMPOS CORRECTOS -->
         <mat-card-title>{{ coin.name }}</mat-card-title>
         <mat-card-subtitle>{{ coin.symbolUppercase }}</mat-card-subtitle>
         
-        <!-- 🔥 RANKING -->
+        <!-- RANKING -->
         <div class="ranking-badge" *ngIf="coin.marketCapRank">
           #{{ coin.marketCapRank }}
         </div>
       </mat-card-header>
       
       <mat-card-content>
-        <!-- 🔥 PRECIO FORMATEADO (YA NO USAS coin.price) -->
+        <!-- PRECIO FORMATEADO (YA NO USAS coin.price) -->
         <div class="price">{{ coin.formattedPrice }}</div>
         
-        <!-- 🔥 CAMBIO PORCENTUAL FORMATEADO (YA NO USAS coin.change) -->
+        <!-- CAMBIO PORCENTUAL FORMATEADO (YA NO USAS coin.change) -->
         <div 
           class="change"
           [ngClass]="coin.priceChangeClass">
           {{ coin.formattedPercentage }}
         </div>
         
-        <!-- 🔥 INFO ADICIONAL (OPCIONAL) -->
+        <!-- INFO ADICIONAL (OPCIONAL) -->
         <div class="additional-info" *ngIf="coin.marketCap">
           <small>Market Cap: {{ coin.marketCap | currency:'USD':'symbol':'1.0-0' }}</small>
         </div>
       </mat-card-content>
       
-      <!-- 🔥 ACCIONES (OPCIONAL) -->
+      <!-- ACCIONES (OPCIONAL) -->
       <mat-card-actions align="end">
         <button mat-button (click)="onCoinClick(coin)">
           VER DETALLES
@@ -81,13 +63,10 @@
     
   </div>
 
-  <!-- 🔥 NO DATA STATE -->
-  <div *ngIf="!isLoading && !error && coins.length === 0" class="no-data-container">
+  <!-- NO DATA STATE -->
+  <div *ngIf="!error && (coins$ | async)?.length === 0" class="no-data-container">
     <mat-icon>info</mat-icon>
     <p>No hay datos de cryptocurrencies disponibles</p>
-    <button mat-raised-button color="primary" (click)="onRefresh()">
-      Cargar datos
-    </button>
   </div>
 
 </div>

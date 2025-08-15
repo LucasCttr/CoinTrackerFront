@@ -6,11 +6,11 @@
   /* Estilos generales del modal */
   background-color: var(--bg-secondary); /* Fondo oscuro semi-transparente */
   border-radius: 12px;
-  padding: 20px 20px 5px 20px; /* 🔥 UNIFICADO: top right bottom left */;
+  padding: 20px 20px 5px 20px; /*  UNIFICADO: top right bottom left */;
 }
 
 .dialog-content {
-  width: 380px; /* 🔥 REDUCE TAMBIÉN AQUÍ */
+  width: 380px; /*  REDUCE TAMBIÉN AQUÍ */
   max-width: 90vw;
   max-height: 80vh; /* Limita altura */
   overflow-y: auto; /* Scroll solo si es necesario */ 
@@ -32,16 +32,16 @@ h2[mat-dialog-title] mat-icon {
 }
 
 .auth-form {
-  padding: 25px 20px 20px 20px; /* 🔥 REDUCE PADDING DE 24px A 20px */
+  padding: 25px 20px 20px 20px; /*  REDUCE PADDING DE 24px A 20px */
   display: flex;
   flex-direction: column;
-  gap: 5px; /* 🔥 REDUCE GAP DE 16px A 14px */
-  min-height: 180px; /* 🔥 REDUCE DE 300px A 280px */
+  gap: 5px; /*  REDUCE GAP DE 16px A 14px */
+  min-height: 180px; /*  REDUCE DE 300px A 280px */
 }
 
 /* Botones más compactos */
 button[mat-raised-button] {
-  height: 44px; /* 🔥 REDUCE DE 48px A 44px */
+  height: 44px; /*  REDUCE DE 48px A 44px */
 }
 
 button[mat-raised-button]:disabled {
@@ -50,7 +50,7 @@ button[mat-raised-button]:disabled {
 
 /* Para subir más el botón */
 div[mat-dialog-actions] {
-  margin-top: -14px !important; /* 🔥 SUBE MÁS */
+  margin-top: -14px !important; /*  SUBE MÁS */
 }
 
 /* ========================================
@@ -59,7 +59,7 @@ div[mat-dialog-actions] {
 
 /* Elimina fondo blanco del botón */
 .auth-form mat-form-field button[mat-icon-button] {
-  background-color: transparent !important; /* 🔥 SIN FONDO */
+  background-color: transparent !important; /*  SIN FONDO */
   width: 32px !important;
   height: 32px !important;
   padding: 0 !important;
@@ -75,7 +75,7 @@ div[mat-dialog-actions] {
 
 /* Hover sutil */
 .auth-form mat-form-field button[mat-icon-button]:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important; /* 🔥 HOVER TRANSPARENTE */
+  background-color: rgba(255, 255, 255, 0.1) !important; /*  HOVER TRANSPARENTE */
   border-radius: 4px !important;
 }
 
@@ -97,7 +97,7 @@ div[mat-dialog-actions] {
 .auth-form mat-form-field .mat-mdc-form-field-suffix {
   display: flex !important;
   align-items: center !important;
-  width: 40px !important; /* 🔥 MISMO ANCHO PARA TODOS */
+  width: 40px !important; /*  MISMO ANCHO PARA TODOS */
   justify-content: center !important;
 }
 
@@ -117,13 +117,13 @@ div[mat-dialog-actions] {
   padding: 0 !important;
   border: none !important;
   box-shadow: none !important;
-  margin: 0 !important; /* 🔥 SIN MARGEN PARA ALINEAR */
+  margin: 0 !important; /*  SIN MARGEN PARA ALINEAR */
 }
 
 /* Icono dentro del botón - mismo tamaño */
 .auth-form mat-form-field button[mat-icon-button] mat-icon {
   color: rgba(255, 255, 255, 0.6) !important;
-  font-size: 20px !important; /* 🔥 MISMO TAMAÑO QUE EL EMAIL */
+  font-size: 20px !important; /*  MISMO TAMAÑO QUE EL EMAIL */
   width: 20px !important;
   height: 20px !important;
 }
@@ -140,7 +140,7 @@ div[mat-dialog-actions] {
 
 /* Fuerza alineación perfecta */
 .auth-form mat-form-field .mat-mdc-form-field-infix {
-  padding-right: 40px !important; /* 🔥 ESPACIO CONSISTENTE */
+  padding-right: 40px !important; /*  ESPACIO CONSISTENTE */
 }
 
 

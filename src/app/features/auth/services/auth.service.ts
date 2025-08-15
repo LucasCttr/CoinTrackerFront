@@ -35,13 +35,13 @@ export class AuthService {
   public currentUser$ = this.currentUserSubject.asObservable();
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   public isLoading$ = this.isLoadingSubject.asObservable();
-  public isInitialized$ = this.isInitializedSubject.asObservable(); // 🔥 NUEVO
+  public isInitialized$ = this.isInitializedSubject.asObservable(); 
   
   constructor(
     private http: HttpClient,
     private router: Router
   ) {
-    // 🔥 INICIALIZACIÓN INMEDIATA Y SÍNCRONA
+    // INICIALIZACIÓN INMEDIATA Y SÍNCRONA
     this.initializeAuthSync();
   }
   
@@ -177,7 +177,7 @@ export class AuthService {
    * Inicializa el estado de autenticación desde localStorage
    */
   private initializeAuth(): void {
-    // 🔥 VERIFICACIÓN DE BROWSER ANTES DE ACCEDER A LOCALSTORAGE
+    // VERIFICACIÓN DE BROWSER ANTES DE ACCEDER A LOCALSTORAGE
     if (typeof window === 'undefined') {
       console.log('🔍 Window no disponible (probablemente SSR)');
       return;
@@ -191,18 +191,18 @@ export class AuthService {
     console.log('🔍 Token encontrado:', !!token);
     console.log('🔍 UserData raw:', userData);
     
-    // 🔥 VALIDACIÓN ESTRICTA ANTES DE JSON.parse
+    // VALIDACIÓN ESTRICTA ANTES DE JSON.parse
     if (token && userData && 
         userData !== 'undefined' && 
         userData !== 'null' && 
         userData !== null && 
         userData.trim() !== '' &&
-        userData.startsWith('{')) { // 🔥 DEBE SER UN OBJETO JSON
+        userData.startsWith('{')) { // DEBE SER UN OBJETO JSON
       
       try {
         const user = JSON.parse(userData);
         
-        // 🔥 VERIFICA QUE EL OBJETO PARSEADO SEA VÁLIDO
+        // VERIFICA QUE EL OBJETO PARSEADO SEA VÁLIDO
         if (user && typeof user === 'object' && user.email) {
           console.log('✅ Restaurando usuario:', user);
           this.currentUserSubject.next(user);
@@ -222,14 +222,14 @@ export class AuthService {
       console.log('📝 No hay datos de autenticación válidos');
       console.log('📝 Razones: token=' + !!token + ', userData=' + userData);
       
-      // 🔥 LIMPIAR DATOS CORRUPTOS
+      // LIMPIAR DATOS CORRUPTOS
       if (userData === 'undefined' || userData === 'null' || userData === null) {
         console.warn('⚠️ Datos corruptos detectados, limpiando...');
         this.clearAuthData();
       }
     }
     
-    // 🔥 LOG FINAL DEL ESTADO
+    // LOG FINAL DEL ESTADO
     console.log('🏁 Estado final:', {
       isAuthenticated: this.isAuthenticated,
       hasUser: !!this.currentUser,
@@ -238,7 +238,7 @@ export class AuthService {
   }
   
   /**
-   * 🔥 Inicialización síncrona del estado de auth
+   * Inicialización síncrona del estado de auth
    */
   private initializeAuthSync(): void {
     // Verificación de browser
@@ -281,7 +281,7 @@ export class AuthService {
     } catch (error) {
       console.error('❌ Error en inicialización:', error);
     } finally {
-      // 🔥 MARCAR COMO INICIALIZADO SIEMPRE
+      // MARCAR COMO INICIALIZADO SIEMPRE
       this.isInitializedSubject.next(true);
       console.log('✅ AuthService inicializado');
     }
@@ -309,7 +309,7 @@ export class AuthService {
       this.setToStorage(this.REFRESH_TOKEN_KEY, response.refreshToken);
     }
     
-    // 🔥 CREAR OBJETO USER A PARTIR DE LAS PROPIEDADES INDIVIDUALES
+    // CREAR OBJETO USER A PARTIR DE LAS PROPIEDADES INDIVIDUALES
     if (response.email && response.name) {
       console.log('👤 Creando usuario a partir de los datos de la respuesta...');
       
@@ -356,7 +356,7 @@ export class AuthService {
     console.error('🔍 Error completo:', error);
     console.error('🔍 Error.error:', error.error);
     
-    // 🔥 ERROR 400 - BAD REQUEST
+    // ERROR 400 - BAD REQUEST
     if (error.status === 400) {
       if (error.error?.message) {
         errorMessage = error.error.message;

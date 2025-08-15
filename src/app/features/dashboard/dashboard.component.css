@@ -4,7 +4,7 @@
 
 .dashboard-container {
   padding: 20px;
-  max-width: 1200px;
+  max-width: 1800px;
   margin: 0 auto;
 }
 
@@ -16,9 +16,9 @@
 
 .crypto-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .crypto-card {

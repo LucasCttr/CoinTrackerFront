@@ -5,7 +5,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatDividerModule } from '@angular/material/divider'; // 🔥 AGREGA ESTO
+import { MatDividerModule } from '@angular/material/divider'; 
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../../features/auth/services/auth.service'; 
@@ -19,7 +19,7 @@ import { AuthModalComponent } from '../../../features/auth/components/auth-modal
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    MatDividerModule, // 🔥 AGREGA ESTO
+    MatDividerModule, 
     CommonModule
   ],
   templateUrl: './global-header.component.html',
@@ -40,7 +40,7 @@ export class GlobalHeaderComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private dialog: MatDialog,
-    private authService: AuthService // 🔥 INYECTA EL AUTHSERVICE
+    private authService: AuthService 
   ) {}
   
   ngOnInit(): void {
@@ -57,7 +57,6 @@ export class GlobalHeaderComponent implements OnInit, OnDestroy {
   // ========================================
   
   private subscribeToAuthState(): void {
-    // 🔥 ESCUCHA CAMBIOS EN EL USUARIO ACTUAL
     this.authService.currentUser$
       .pipe(takeUntil(this.destroy$))
       .subscribe(user => {
@@ -65,7 +64,7 @@ export class GlobalHeaderComponent implements OnInit, OnDestroy {
         console.log('🔍 Usuario actual en header:', user);
       });
     
-    // 🔥 ESCUCHA CAMBIOS EN EL ESTADO DE AUTENTICACIÓN
+
     this.authService.isAuthenticated$
       .pipe(takeUntil(this.destroy$))
       .subscribe(isAuth => {
@@ -73,7 +72,6 @@ export class GlobalHeaderComponent implements OnInit, OnDestroy {
         console.log('🔍 Estado de autenticación:', isAuth);
       });
     
-    // 🔥 ESCUCHA ESTADO DE CARGA
     this.authService.isLoading$
       .pipe(takeUntil(this.destroy$))
       .subscribe(loading => {
@@ -110,7 +108,7 @@ export class GlobalHeaderComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result?.success) {
-        console.log('🎉 Usuario autenticado exitosamente');
+        console.log(' Usuario autenticado exitosamente');
         // No necesitas hacer nada más, los observables se actualizarán automáticamente
       }
     });
@@ -118,7 +116,7 @@ export class GlobalHeaderComponent implements OnInit, OnDestroy {
   
   logout(): void {
     this.authService.logout();
-    console.log('👋 Usuario deslogueado');
+    console.log(' Usuario deslogueado');
   }
   
   // ========================================

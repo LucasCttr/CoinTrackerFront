@@ -7,11 +7,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button'; // 🔥 AGREGA ESTO
-import { CommonModule } from '@angular/common'; // 🔥 AGREGA ESTO
+import { MatButtonModule } from '@angular/material/button'; 
+import { CommonModule } from '@angular/common'; 
 
 // Importa el AuthService
-import { AuthService } from '../../services/auth.service'; // 🔥 AGREGA ESTO
+import { AuthService } from '../../services/auth.service'; 
 
 @Component({
   selector: 'app-auth-modal',
@@ -22,8 +22,8 @@ import { AuthService } from '../../services/auth.service'; // 🔥 AGREGA ESTO
     MatInputModule, 
     ReactiveFormsModule, 
     MatIcon,
-    MatButtonModule, // 🔥 AGREGA ESTO
-    CommonModule // 🔥 AGREGA ESTO
+    MatButtonModule, 
+    CommonModule 
   ],
   templateUrl: './auth-modal.component.html',
   styleUrls: ['./auth-modal.component.css']
@@ -32,13 +32,13 @@ export class AuthModalComponent implements OnInit {
   loginForm!: FormGroup;
   registerForm!: FormGroup;
   hidePassword = true;
-  isLoading = false; // 🔥 AGREGA ESTADO DE CARGA
-  errorMessage = ''; // 🔥 AGREGA MANEJO DE ERRORES
+  isLoading = false; 
+  errorMessage = ''; 
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AuthModalComponent>,
-    private authService: AuthService // 🔥 INYECTA EL AUTHSERVICE
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
